@@ -1,9 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Row
 from sqlalchemy.orm import sessionmaker, declarative_base
-from flask_server.cutom_logger import create_logger
+from custom_logger import create_logger
 
-con_url = 'postgresql://postgres:password@localhost:5432/meal_builder'
+con_url = 'postgresql://postgres:password@localhost:5432/my_city_my_places'
 engine = create_engine(con_url)
 Session = sessionmaker(bind=engine)
 

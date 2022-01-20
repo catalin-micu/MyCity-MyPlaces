@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy import Integer, Column, String, delete, select, update
+from sqlalchemy.orm import relationship
+
 from models import BaseTable, logger
 
 
@@ -14,8 +16,8 @@ class UsersColumns:
     PASSWD = 'passwd'
 
 
-USER_COLUMNS_LIST = {UsersColumns.USER_ID, UsersColumns.USER_NAME, UsersColumns.ADDRESS_LINE, UsersColumns.CITY,
-                     UsersColumns.EMAIL, UsersColumns.PASSWD}
+USER_COLUMNS_LIST = [UsersColumns.USER_ID, UsersColumns.USER_NAME, UsersColumns.ADDRESS_LINE, UsersColumns.CITY,
+                     UsersColumns.EMAIL, UsersColumns.PASSWD]
 
 ACCEPTED_IDENTIFIER_TYPES = {UsersColumns.USER_ID, UsersColumns.EMAIL}
 
@@ -30,6 +32,8 @@ class Users(BaseTable):
     email = Column(String, nullable=False, unique=True)
     passwd = Column(String, nullable=False)
 
+    family_members = relationship('FamilyMembers', back_populates='users')
+
     def insert_user(self, user_data: dict) -> list:
         """
         inserts a new user in the db if entry doesn't already exist
@@ -42,8 +46,7 @@ class Users(BaseTable):
 
         receipt = []
 
-        insert_stmt = insert(Users).values(user_data).returning(
-            Users.full_name, Users.email, Users.preferred_addresses)
+        insert_stmt = insert(Users).values(user_data).returning(Users.user_name, Users.email)
 
         inserted_row = self.session.execute(insert_stmt)
         self.session.commit()
@@ -88,7 +91,7 @@ class Users(BaseTable):
             delete_stmt = delete_stmt.where(Users.user_id.in_(rows_to_delete))
         else:
             delete_stmt = delete_stmt.where(Users.email.in_(rows_to_delete))
-        delete_stmt = delete_stmt.returning(Users.full_name, Users.email, Users.phone_number)
+        delete_stmt = delete_stmt.returning(Users.user_name, Users.email)
 
         deleted_rows = self.session.execute(delete_stmt).fetchall()
         self.session.commit()
@@ -135,6 +138,6 @@ class Users(BaseTable):
         select_stmt = select(Users).where(Users.__table__.c[identifier_type] == identifier)
         exec_result = self.session.execute(select_stmt).fetchall()
 
-        # todo: continue this
+        user_data = super(Users, Users)._transform_row_into_dict(exec_result[0], USER_COLUMNS_LIST)
 
         return user_data

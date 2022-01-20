@@ -1,0 +1,30 @@
+[
+  {
+    "user_name": "Micu Marius Catalin",
+    "address_line": "Sergent Ilie Petre 86",
+    "city": "Chiajna",
+    "email": "catalinmicu98@gmail.com",
+    "passwd": "password"
+  },
+  {
+    "user_name": "Micu Alexandru",
+    "address_line": "1 Decembrie 1918 23",
+    "city": "Craiova",
+    "email": "alexandrumicu71@gmail.com",
+    "passwd": "password"
+  },
+  {
+    "user_name": "Micu Cosmin Andrei",
+    "address_line": "1 Decembrie 1918 23",
+    "city": "Craiova",
+    "email": "cosminmicu98@gmail.com",
+    "passwd": "password"
+  },
+  {
+    "user_name": "Bornac Razvan",
+    "address_line": "Sergent Ilie Petre 102",
+    "city": "Chiajna",
+    "email": "razvan98@gmail.com",
+    "passwd": "password"
+  }
+]

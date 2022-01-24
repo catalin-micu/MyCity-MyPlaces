@@ -131,8 +131,6 @@ class Users(BaseTable):
             logger.error(f"User with '{identifier_type}' identifier = '{identifier}' does not exist")
             raise StopIteration
 
-        user_data = dict()
-
         select_stmt = select(Users).where(Users.__table__.c[identifier_type] == identifier)
         exec_result = self.session.execute(select_stmt).fetchall()
 

@@ -1,5 +1,8 @@
+import json
+
 from models.families import Families
 from models.family_members import FamilyMembers
+from models.places import Places
 from models.users import Users
 from utils import user_batch_insert
 
@@ -15,5 +18,11 @@ if __name__ == '__main__':
     #     families.insert_family(item)
 
     family_members = FamilyMembers()
-    family_members.insert_family_member(family_id=3, user_id=2)
+    # family_members.insert_family_member(family_id=3, user_id=2)
+
+    places = Places()
+    with open('data_files/places.json') as f:
+        input_json = json.load(f)
+    # places.delete_place('1', 'place_id')
+    places.insert_place(input_json[0])
     a=2

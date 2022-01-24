@@ -1,5 +1,4 @@
 from datetime import datetime
-
 import googlemaps
 
 gmaps = googlemaps.Client(key='AIzaSyBZ7l2jGuWaRGn2rm1TKhW3GjmraDCpEgA')

@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy import Integer, Column, String, delete, select, update, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 
 from models import BaseTable, logger
 
@@ -27,10 +27,10 @@ class FamilyMembers(BaseTable):
     family_id = Column(Integer, ForeignKey('families.family_id'), nullable=False)
     user_id = Column(Integer, ForeignKey('users.user_id'), nullable=False)
 
-    users = relationship('Users', back_populates='family_members')
-    families = relationship('Families', back_populates='family_members')
+    users = relationship('Users', backref=backref('family_members', uselist=False))
+    families = relationship('Families', backref=backref('family_members', uselist=False))
 
-    def insert_family_members(self, family_id: int, user_id: int) -> []:
+    def insert_family_member(self, family_id: int, user_id: int) -> []:
         receipt = []
 
         insert_stmt = insert(FamilyMembers).values({FamilyMembersColumns.FAMILY_ID: family_id,

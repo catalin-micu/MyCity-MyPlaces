@@ -32,8 +32,6 @@ class Users(BaseTable):
     email = Column(String, nullable=False, unique=True)
     passwd = Column(String, nullable=False)
 
-    family_members = relationship('FamilyMembers', back_populates='users')
-
     def insert_user(self, user_data: dict) -> list:
         """
         inserts a new user in the db if entry doesn't already exist

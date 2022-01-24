@@ -15,5 +15,5 @@ if __name__ == '__main__':
     #     families.insert_family(item)
 
     family_members = FamilyMembers()
-    family_members.insert_family_members(1, 2)
+    family_members.insert_family_member(family_id=3, user_id=2)
     a=2

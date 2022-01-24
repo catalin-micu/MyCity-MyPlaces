@@ -23,8 +23,6 @@ class Families(BaseTable):
     family_id = Column(Integer, primary_key=True)
     family_name = Column(String, nullable=False)
 
-    family_members = relationship('FamilyMembers', back_populates='families')
-
     def insert_family(self, family_name: str) -> []:
         receipt = []
 

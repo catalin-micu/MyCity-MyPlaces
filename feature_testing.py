@@ -1,5 +1,5 @@
 import json
-
+from googlemaps_api import get_city_point, place_search
 from models.families import Families
 from models.family_members import FamilyMembers
 from models.places import Places
@@ -24,5 +24,7 @@ if __name__ == '__main__':
     with open('data_files/places.json') as f:
         input_json = json.load(f)
     # places.delete_place('1', 'place_id')
-    places.insert_place(input_json[0])
+    # places.insert_place(input_json[0])
+
+    x = place_search('electroputere mall', 'craiova')
     a=2

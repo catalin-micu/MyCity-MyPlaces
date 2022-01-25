@@ -46,3 +46,23 @@ class FamilyMembers(BaseTable):
         logger.info(f"Successfully added user '{user_id}' to family '{family_id}'")
 
         return receipt
+
+    def get_family_members_of_user(self, input_user_id: int) -> []:
+        """
+        gets family members of a user
+        :param input_user_id: WELL, THE USER_ID IN QUESTION, WHAT ELSE COULD IT BE?
+        :return: list of user_ids for all the members in the family (including input_user_id)
+        """
+        family_members = []
+
+        select_stmt = select(FamilyMembers).where(FamilyMembers.user_id == input_user_id)
+        row = self.session.execute(select_stmt).fetchall()[0]
+        user_family_id = super(FamilyMembers, FamilyMembers)._transform_row_into_dict(row, FAMILY_MEMBERS_COLUMNS_LIST).\
+            get(FamilyMembersColumns.FAMILY_ID)
+        select_stmt = select(FamilyMembers).where(FamilyMembers.family_id == user_family_id)
+        rows = self.session.execute(select_stmt).fetchall()
+        for r in rows:
+            family_members.append(super(FamilyMembers, FamilyMembers)._transform_row_into_dict(r,
+                                  FAMILY_MEMBERS_COLUMNS_LIST).get(FamilyMembersColumns.USER_ID))
+
+        return family_members

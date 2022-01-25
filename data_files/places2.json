@@ -1,0 +1,37 @@
+[
+  {
+    "google_id": "ChIJASH7AVbWUkcR3qAAg95cQNo",
+    "user_id": 2,
+    "is_private": false
+  },
+  {
+    "google_id": "ChIJ53qlaJ_XUkcR3w8gg4kAiGQ",
+    "user_id": 2,
+    "is_private": false
+  },
+  {
+    "google_id": "ChIJf5AjGADXUkcRMInxKDajPPU",
+    "user_id": 2,
+    "is_private": true
+  },
+  {
+    "google_id": "ChIJjXw6YRHXUkcRBH6DNx9tICE",
+    "user_id": 2,
+    "is_private": true
+  },
+  {
+    "google_id": "ChIJA8vmm8rXUkcRZAU2gmqH9sk",
+    "user_id": 2,
+    "is_private": false
+  },
+  {
+    "google_id": "ChIJxUvmMpzXUkcRfJzbDwbpiEU",
+    "user_id": 2,
+    "is_private": false
+  },
+  {
+    "google_id": "ChIJu_04sZjXUkcRKJ6G4mawG0k",
+    "user_id": 2,
+    "is_private": true
+  }
+]

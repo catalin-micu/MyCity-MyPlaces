@@ -21,3 +21,12 @@ def search_place():
         return Response("Invalid request body", status=400)
 
     return jsonify(place_search(string_query, city))
+
+
+@places_blueprint.route('/add-place', methods=['POST'])
+def add_place():
+    string_query = request.json.get('string_query')
+    city = request.json.get('city')
+    if not string_query or not city:
+        return Response("Invalid request body", status=400)
+    # to be continued

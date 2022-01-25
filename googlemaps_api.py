@@ -18,6 +18,12 @@ def get_city_point(city: str) -> str:
 
 
 def place_search(string_query: str, city: str) -> dict:
+    """
+    searches for a place in a specific city
+    :param string_query: name of the place
+    :param city: city in which the place can be found
+    :return: full result of googlemaps api search
+    """
     place_id = gmaps.find_place(input=[string_query], input_type='textquery', location_bias=get_city_point(city))
     place_id = place_id['candidates'][0]['place_id']
 

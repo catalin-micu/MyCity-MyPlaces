@@ -7,6 +7,15 @@ users = Users()
 
 @users_blueprint.route('/create-user', methods=['POST'])
 def create_user():
+    """
+    {
+        "user_name": "Micu Marius Catalin",
+        "address_line": "Sergent Ilie Petre 86",
+        "city": "Chiajna",
+        "email": "catalinmicu98@gmail.com",
+        "passwd": "password"
+    }
+    """
     data = request.json
     users.insert_user(data)
 
@@ -15,6 +24,11 @@ def create_user():
 
 @users_blueprint.route('/get-user-info', methods=['POST'])
 def get_user_info():
+    """
+    {
+        "email": "catalinmicu98@gmail.com"
+    }
+    """
     email = request.json.get('email')
     if not email:
         return Response('Email must be present in request body', status=400)

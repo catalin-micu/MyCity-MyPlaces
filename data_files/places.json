@@ -1,7 +1,42 @@
 [
   {
-    "google_id": "ChIJX8ojBXLXUkcRP3q2qv1VXLc",
-    "user_id": 2,
+    "google_id": "ChIJxwyyEQjXUkcRNeG181ebVzU",
+    "user_id": 1,
+    "is_private": false
+  },
+  {
+    "google_id": "ChIJ53qlaJ_XUkcR3w8gg4kAiGQ",
+    "user_id": 1,
+    "is_private": false
+  },
+  {
+    "google_id": "ChIJnUYRK6DXUkcRXR5Pb7E_1IA",
+    "user_id": 1,
+    "is_private": false
+  },
+  {
+    "google_id": "ChIJnaClLqLXUkcRUEeZVccyrj4",
+    "user_id": 1,
+    "is_private": true
+  },
+  {
+    "google_id": "ChIJRyNeF3cBskAR5tXdccQdoZI",
+    "user_id": 1,
+    "is_private": true
+  },
+  {
+    "google_id": "ChIJpcAQ1t8BskARkc3-JtIOuHI",
+    "user_id": 1,
+    "is_private": true
+  },
+  {
+    "google_id": "ChIJA9ULYtsBskARWQoSK2UfHBI",
+    "user_id": 1,
+    "is_private": true
+  },
+  {
+    "google_id": "ChIJASH7AVbWUkcR3qAAg95cQNo",
+    "user_id": 1,
     "is_private": false
   }
 ]

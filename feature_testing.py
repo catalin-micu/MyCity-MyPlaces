@@ -22,7 +22,7 @@ if __name__ == '__main__':
     # family_members.get_family_members_of_user(2)
 
     places = Places()
-    with open('data_files/places3.json') as f:
+    with open('data_files/places4.json') as f:
         input_json = json.load(f)
     # places.delete_place('1', 'place_id')
     for item in input_json:

@@ -40,3 +40,9 @@ def place_search_using_gmaps_id(place_ids: []) -> []:
         })
 
     return result
+
+
+def get_place_coordinates(place_id: str) -> dict:
+    coordinates = gmaps.place(place_id)['result']
+
+    return coordinates['geometry']['location']

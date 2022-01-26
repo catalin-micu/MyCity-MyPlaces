@@ -60,7 +60,6 @@ class Places(BaseTable):
         logger.info(f"Successfully deleted place:\n\t\t{deleted_rows[0]}")
 
     def get_places(self, identifier, identifier_type):
-        result = []
         if identifier_type not in ACCEPTED_IDENTIFIER_TYPES:
             logger.error(f"Unknown identifier type: '{identifier_type}'")
             raise StopIteration
@@ -69,7 +68,4 @@ class Places(BaseTable):
         rows = self.session.execute(select_stmt).fetchall()
         rows = [super(Places, Places)._transform_row_into_dict(r, PLACES_COLUMNS_LIST) for r in rows]
 
-        for r in rows:
-            result.append(r.get(PlacesColumns.GOOGLE_ID))
-
-        return result
+        return rows

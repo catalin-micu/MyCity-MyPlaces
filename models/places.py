@@ -1,5 +1,3 @@
-import json
-from pathlib import Path
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy import Integer, Column, String, delete, select, update, ForeignKey, Boolean
 from sqlalchemy.orm import relationship, backref
@@ -13,10 +11,10 @@ class PlacesColumns:
     IS_PRIVATE = 'is_private'
 
 
-FAMILY_MEMBERS_COLUMNS_LIST = [PlacesColumns.PLACE_ID, PlacesColumns.GOOGLE_ID, PlacesColumns.USER_ID,
+PLACES_COLUMNS_LIST = [PlacesColumns.PLACE_ID, PlacesColumns.GOOGLE_ID, PlacesColumns.USER_ID,
                                PlacesColumns.IS_PRIVATE]
 
-ACCEPTED_IDENTIFIER_TYPES = {PlacesColumns.PLACE_ID, PlacesColumns.GOOGLE_ID}
+ACCEPTED_IDENTIFIER_TYPES = {PlacesColumns.PLACE_ID, PlacesColumns.GOOGLE_ID, PlacesColumns.USER_ID}
 
 
 class Places(BaseTable):
@@ -60,3 +58,18 @@ class Places(BaseTable):
         self.session.commit()
 
         logger.info(f"Successfully deleted place:\n\t\t{deleted_rows[0]}")
+
+    def get_places(self, identifier, identifier_type):
+        result = []
+        if identifier_type not in ACCEPTED_IDENTIFIER_TYPES:
+            logger.error(f"Unknown identifier type: '{identifier_type}'")
+            raise StopIteration
+
+        select_stmt = select(Places).where(Places.__table__.c[identifier_type].in_([identifier]))
+        rows = self.session.execute(select_stmt).fetchall()
+        rows = [super(Places, Places)._transform_row_into_dict(r, PLACES_COLUMNS_LIST) for r in rows]
+
+        for r in rows:
+            result.append(r.get(PlacesColumns.GOOGLE_ID))
+
+        return result

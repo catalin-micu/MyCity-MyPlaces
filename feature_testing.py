@@ -22,11 +22,11 @@ if __name__ == '__main__':
     # family_members.get_family_members_of_user(2)
 
     places = Places()
-    with open('data_files/places4.json') as f:
-        input_json = json.load(f)
-    # places.delete_place('1', 'place_id')
-    for item in input_json:
-        places.insert_place(item)
+    # with open('data_files/places4.json') as f:
+    #     input_json = json.load(f)
+    # for item in input_json:
+    #     places.insert_place(item)
+    places.get_places(1, 'user_id')
 
     # x = place_search('electroputere mall', 'craiova')
     a=2

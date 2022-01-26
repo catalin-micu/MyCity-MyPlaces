@@ -28,3 +28,15 @@ def place_search(string_query: str, city: str) -> dict:
     place_id = place_id['candidates'][0]['place_id']
 
     return gmaps.place(place_id)['result']
+
+
+def place_search_using_gmaps_id(place_ids: []) -> []:
+    result = []
+    for id in place_ids:
+        gmaps_data = gmaps.place(id)['result']
+        result.append({
+            'name': gmaps_data.get('name'),
+            'rating': gmaps_data.get('rating')
+        })
+
+    return result

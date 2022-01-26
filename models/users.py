@@ -137,3 +137,9 @@ class Users(BaseTable):
         user_data = super(Users, Users)._transform_row_into_dict(exec_result[0], USER_COLUMNS_LIST)
 
         return user_data
+
+    def check_login_credentials(self, email: str, passwd: str) -> bool:
+        select_stmt = select(Users).where(Users.email == email).where(Users.passwd == passwd)
+        selected_row = self.session.execute(select_stmt)
+        rows = [r for r in selected_row]
+        return bool(len(rows))

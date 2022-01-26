@@ -35,3 +35,22 @@ def get_user_info():
     used_data = users.get_user_data(email, 'email')
 
     return jsonify(used_data)
+
+
+@users_blueprint.route('/login', methods=['POST'])
+def login():
+    """
+    check params
+    if params ok, create session_table entry, allow access
+    else deny access
+    request = dict with two keys: email, passwd
+    :return: allow = 200, deny = 403
+    """
+    data = request.json
+    email = data.get('email')
+    passwd = data.get('passwd')
+
+    if users.check_login_credentials(email, passwd):
+        return Response('All good', status=200)
+    else:
+        return Response('Invalid credentials! Access denied', status=403)

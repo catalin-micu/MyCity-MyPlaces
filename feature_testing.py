@@ -26,7 +26,7 @@ if __name__ == '__main__':
     #     input_json = json.load(f)
     # for item in input_json:
     #     places.insert_place(item)
-    places.get_places(1, 'user_id')
+    places.get_all_google_ids()
 
     # x = place_search('electroputere mall', 'craiova')
     a=2

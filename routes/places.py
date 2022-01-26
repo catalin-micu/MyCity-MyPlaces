@@ -96,3 +96,19 @@ def get_family_places():
         true_result.append(coordinates)
 
     return jsonify(true_result)
+
+
+@places_blueprint.route('/popularity', methods=['GET'])
+def compute_places_popularity():
+    places_ids = places.get_all_google_ids()
+    occurences = []
+    for id in places_ids:
+        occurences.append({
+            'x': place_search_using_gmaps_id([id])[0]['name'],
+            'y': len(places.get_places(identifier=id, identifier_type='google_id'))
+        })
+
+    return jsonify([{
+        'key': 'Places popularity',
+        'values': occurences
+    }])

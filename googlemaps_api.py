@@ -46,3 +46,12 @@ def get_place_coordinates(place_id: str) -> dict:
     coordinates = gmaps.place(place_id)['result']
 
     return coordinates['geometry']['location']
+
+
+def compute_price_level(place_id: str) -> dict:
+    gmaps_data = gmaps.place(place_id)['result']
+
+    if gmaps_data.get('price_level'):
+        return {'name': gmaps_data['name'], 'price_level': gmaps_data.get('price_level')}
+
+    return None

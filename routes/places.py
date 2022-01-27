@@ -1,5 +1,5 @@
 from flask import jsonify, Blueprint, request, Response
-from googlemaps_api import place_search, place_search_using_gmaps_id, get_place_coordinates
+from googlemaps_api import place_search, place_search_using_gmaps_id, get_place_coordinates, compute_price_level
 from models.families import Families
 from models.family_members import FamilyMembers
 from models.places import Places
@@ -112,3 +112,28 @@ def compute_places_popularity():
         'key': 'Places popularity',
         'values': occurences
     }])
+
+
+@places_blueprint.route('/price-level', methods=['POST'])
+def get_price_level():
+    email = request.json.get('email')
+    if not email:
+        return Response("email not in request body", status=400)
+
+    user_id = users.get_user_data(identifier=email, identifier_type='email').get('user_id')
+    favourite_places = places.get_places(identifier=user_id, identifier_type='user_id')
+    favourite_places = [item['google_id'] for item in favourite_places]
+
+    temp = []
+    for id in favourite_places:
+        raw_data = compute_price_level(id)
+        if raw_data:
+            temp.append(raw_data)
+    result = []
+    for i in range(len(temp)):
+        result.append({
+            'key': temp[i]['name'],
+            'values': [{'x': i + 1, 'y': temp[i]['price_level'] * 4, 'r': temp[i]['price_level'] * 2}]
+        })
+
+    return jsonify(result)
